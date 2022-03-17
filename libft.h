@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 08:07:22 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/03/05 13:49:45 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:26:38 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,30 @@
 # define LIBFT_H
 # include<stdlib.h>
 
+// typedef struct point_xyz
+// {
+// 	int x;
+// 	int y;
+// 	int z;
+// 	int coler;
+// }	point_xyz;
+
+// typedef struct s_list
+// {
+// 	void			*content;
+// 	void 			*x;
+// 	void			*y;
+// 	void			*z;
+// 	void			*coler;
+// 	struct s_list	*next;
+// }	t_list;
+
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
 int		ft_isalpha(int a);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);

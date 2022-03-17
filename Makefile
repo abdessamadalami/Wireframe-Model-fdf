@@ -6,7 +6,7 @@
 #    By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 08:52:13 by ael-oual          #+#    #+#              #
-#    Updated: 2022/03/05 10:38:28 by ael-oual         ###   ########.fr        #
+#    Updated: 2022/03/09 13:48:01 by ael-oual         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME = fdfd
 #OBJ = $(SRC:.c=.o)
 #OBJB = $(BS:.c=.o)
 all: $(OBJB)
-	$(CC)  $(SRC) -lmlx -framework OpenGL -framework AppKit -o $(NAME) 
+	$(CC)  $(SRC) -lmlx -framework OpenGL -framework AppKit libft.a
 #bonus: $(OBJB)
 #	$(CC) $(BS) -o $(NAME2)
 #clean: 
