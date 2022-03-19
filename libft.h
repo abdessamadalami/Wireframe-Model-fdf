@@ -6,14 +6,26 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 08:07:22 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/03/17 12:26:38 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/03/19 10:18:25 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include<stdlib.h>
-
+# include<stdlib.h>
+# include<stdio.h>
+# include<unistd.h>
+# include <fcntl.h>
+# include <string.h>
+# include<sys/wait.h>
+#include <mlx.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include "get_next_line.h"
+#include "libft.h"
 // typedef struct point_xyz
 // {
 // 	int x;
@@ -38,6 +50,21 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int ft_strlen_d(char **arr_split);
+void	free_function(char **str);
+int  **check_list(t_list *list, int *length_line);
+void print_matrix(int **x_y_z_matrix);
+void x_y_z_c_function(char **split_line, int nbr_lin,int **x_y_z_matrix);
+int *bre_algori(void *mlx,void *mlx_win,int x1, int y1, int x2, int y2, int coler);
 int		ft_isalpha(int a);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
