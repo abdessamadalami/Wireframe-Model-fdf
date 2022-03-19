@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:44:37 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/03/19 11:13:33 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/03/19 17:59:17 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int ft_strlen_d(char **arr_split)
 	return index;
 }
 
-void plotLine(int x0, int y0, int x1, int y1)
+// void plotLine(int x0, int y0, int x1, int y1)
+int *bre_algori(void *mlx,void *mlx_win,int x0, int y0, int x1, int y1, int coler)
   {  
 		int dx = abs(x1 - x0);
     int sx = (x0 < x1) ? 1 : -1 ;
@@ -44,6 +45,8 @@ void plotLine(int x0, int y0, int x1, int y1)
     while(1)
       { 
 		 //  plot(x0, y0);
+		// printf(" < x %d y %d  x1: %d y1 :%d > \n ", x0, y0, x1, y1);
+		 mlx_pixel_put(mlx, mlx_win ,x0 ,y0 , coler);
         if( x0 == x1 && y0 == y1)
 			break;
         int e2 = 2 * error;
@@ -63,44 +66,10 @@ void plotLine(int x0, int y0, int x1, int y1)
             	y0 = y0 + sy;
 			}
 		}
-
+		return 0;
+		
   }
 
-int *bre_algori(void *mlx,void *mlx_win,int x1, int y1, int x2, int y2, int coler)
-{
-	int dx;
-	int dy;
-	int p;
-	int yi = 1;
-	int **tab;
-	
-	if(x1 > x2)
-		bre_algori(mlx,mlx_win, x2,y2, x1, y1,coler);
-	dx = x2 - x1; //negative numbres 
-	dy = y2 - y1;
-	if (dy < 0)
-	{
-		yi = -1;
-		dy = abs(dy);
-	}
-	p = 2 * dy - dx;
-	printf("______________________________________ \nA (%d,%d) B(%d ,%d)\n",x1,y1,x2,y2);
-	
-	while(x1 <= x2)
-	{
-		mlx_pixel_put(mlx, mlx_win ,x1 ,y1 , coler);
-		printf("( %d , %d ) p = %d \n", x1,y1,p);
-		x1++;
-		if (p < 0)
-			p = p + 2 * dy;
-		else
-			{
-				p = p + 2 * dy - 2 * dx;
-				y1 = y1 + yi; 
-			}
-	}
-	return 0;
-}
 void del(void *ptr)
 {
 //	*(int*)ptr = 5;

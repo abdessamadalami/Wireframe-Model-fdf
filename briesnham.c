@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 06:40:26 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/03/19 10:26:35 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/03/19 19:36:00 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void isometric_projection(int **x_y_z_matrix, int length_line, int n_points)
 	//printf("t <%d> L <%d> ",w ,length_line);
 	while (line_number < n_points)
 	{ 
-		x = ((x_y_z_matrix[line_number][1] - x_y_z_matrix[line_number][2])) * (10 * 2) + 500;
-		y = ((x_y_z_matrix[line_number][1] + (x_y_z_matrix[line_number][2]) + 10) * 10) - x_y_z_matrix[line_number][3];
-			//printf("x %d y %d \n", x,y);
+		x = ((x_y_z_matrix[line_number][1] - x_y_z_matrix[line_number][2])) * 10 * 3  + 800; // we must change this to index for get a dynamically  f logic thanks :) 
+		y = ((x_y_z_matrix[line_number][1] + (x_y_z_matrix[line_number][2])) * 11 + 300) - x_y_z_matrix[line_number][3];
+		printf("x %d y %d \n", x,y);
 		x_y_z_matrix[line_number][1] = x;
 		x_y_z_matrix[line_number][2] = y;
 		line_number++;
@@ -70,13 +70,12 @@ void isometric_projection(int **x_y_z_matrix, int length_line, int n_points)
 
 void drawing_points(int **x_y_z_matrix , int length_line , int n_points)
 {
-	int color;
-	int line_number;
+	int		color;
+	int		line_number;
 	void 	*mlx_win;
 	void	*mlx;
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1000, 1000, "FDF :)");
-
+	mlx_win = mlx_new_window(mlx, 2000,1020, "FDF :)");
 	line_number = 0;
 	color = 0x1cc738;;
 	while (x_y_z_matrix[line_number])
@@ -115,6 +114,7 @@ int  *array_split(char **split_arr ,int size) //split array in defirrent time u 
 	}
 	return (z_array);
 }
+
 int	main(int argc ,char **argv)
 {
 	int		**x_y_z_matrix;
