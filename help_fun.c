@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:44:37 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/03/19 10:29:45 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/03/19 11:13:33 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,38 @@ int ft_strlen_d(char **arr_split)
 		index++;
 	return index;
 }
+
+void plotLine(int x0, int y0, int x1, int y1)
+  {  
+		int dx = abs(x1 - x0);
+    int sx = (x0 < x1) ? 1 : -1 ;
+    int dy = -abs(y1 - y0);
+   	int  sy = (y0 < y1) ? 1 : -1;
+    int error = dx + dy;
+    while(1)
+      { 
+		 //  plot(x0, y0);
+        if( x0 == x1 && y0 == y1)
+			break;
+        int e2 = 2 * error;
+        if (e2 >= dy)
+           { 
+			   if(x0 == x1)
+			   		break;
+            error = error + dy;
+            x0 = x0 + sx;
+			}
+       
+        if (e2 <= dx)
+           {
+			    if (y0 == y1)
+					break;
+            	error = error + dx;
+            	y0 = y0 + sy;
+			}
+		}
+
+  }
 
 int *bre_algori(void *mlx,void *mlx_win,int x1, int y1, int x2, int y2, int coler)
 {
