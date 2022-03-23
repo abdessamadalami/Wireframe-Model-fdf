@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 06:40:26 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/03/20 17:59:44 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/03/23 12:14:10 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 #include "libft.h"
+#include <math.h>
 
 
 
@@ -29,27 +30,76 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+int	ft_strchr_int(const char *str, int c)
+{
+	const char	*s;
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == (unsigned char)c)
+			return (i);
+		i++;
+	}	
+		return (0);
+}
+
+int to_decimal(char *str)
+{
+	int i;
+	char c;
+	int nbr;
+	int len;
+	char *hix="0123456789abcdef";
+	
+	i = 0; 
+	c = 0;
+	nbr = 0;
+	if (str[0] == '0' && str[1] == 'x')
+		str = str + 2;
+ 	len = ft_strlen(str) - 1;
+	while(str[i] != '\0')
+	{
+		c =  ft_tolower(str[i]);
+		nbr = nbr + ft_strchr_int(hix, c) * pow(16, len);
+		i++;
+		len--;
+	}
+	return nbr;
+}
+
 void x_y_z_c_function(char **split_line, int nbr_lin,int **x_y_z_matrix)
 {
 	int index;
+	char **split_z;
 	static int i;
-	index = 0;
 	
+	index = 0;
 	while(split_line[index] != 0)
 	{
-		 x_y_z_matrix[i] = malloc(4 * sizeof(int));
-		 x_y_z_matrix[i][0] = i ; 
+		 x_y_z_matrix[i] = malloc(5 * sizeof(int));
+		 x_y_z_matrix[i][0] = i; 
 		 x_y_z_matrix[i][1] = index ; //echelle
-		 x_y_z_matrix[i][2]	= nbr_lin;
-		 x_y_z_matrix[i][3] = ft_atoi(split_line[index]);
-		 x_y_z_matrix[i][4] = 0;
-		 i++;
-		 index++;
+		 x_y_z_matrix[i][2]	= nbr_lin; 
+		 split_z = ft_split(split_line[index],',');
+		
+		if (split_z[0] != 0)
+			x_y_z_matrix[i][3] = ft_atoi(split_z[0]);
+		if (split_z[1] != 0)
+		{
+			x_y_z_matrix[i][4] = to_decimal(split_z[1]);
+		}	
+		else
+			x_y_z_matrix[i][4] = 0x49eb34;
+		i++;
+		index++;
 	}
+	//print_matrix(x_y_z_matrix);
 }
 int max(int num1, int num2)
 {
-    return (num1 > num2 ) ? num1 : num2;
+    return (num1 > num2 ) ? num1 : num2; // ??
 }
 
 void isometric_projection(int **x_y_z_matrix, int length_line, int n_points)
@@ -64,41 +114,38 @@ void isometric_projection(int **x_y_z_matrix, int length_line, int n_points)
 	int min_x,max_x,max_y,min_y;
 	min_x = max_x = max_y = min_y = 0;
 	int rotation_index = 1;
-	int cam = 4;
+	int cam = 12;
 	while (line_number < n_points)
 	{ 
-		
 		x = ((x_y_z_matrix[line_number][1] - x_y_z_matrix[line_number][2])); //* 10 + 300 for cancel negative number
 		 if (x < min_x && x < 0)
-			 min_x = x; // +300
+			min_x = x; // +300
 		 if (x > max_x)
-			 max_x = x;	 
+			max_x = x;	 
 	 // we must change this to index for get a dynamically  f logic thanks :) 
-		y = ((x_y_z_matrix[line_number][1] + (x_y_z_matrix[line_number][2]) * cam) - x_y_z_matrix[line_number][3]); //+300 for to down in y * 11 and tjpd lmap 
+		y = ((x_y_z_matrix[line_number][1] + (x_y_z_matrix[line_number][2]) * 1) - x_y_z_matrix[line_number][3]); //+300 for to down in y * 11 and tjpd lmap 
 		 if (y < min_y && y < 0)
-			 min_y = y; // +300
+			min_y = y; // +300
 		 if (y > max_y)
-			 max_y = y;
+			max_y = y;
 		x_y_z_matrix[line_number][1] = x;
 		x_y_z_matrix[line_number][2] = y;
-//printf("_x %d y %d \n", x_y_z_matrix[line_number][1],x_y_z_matrix[line_number][2]);
 		line_number++;
 	}
+	printf("max x  %d max y %d \n", max_x ,max_y);
+	
 	int add = max(abs(min_y),abs(min_x));
-	int echelle_x = 1000/(abs(min_x) + max_x);
-	int echelle_y = 1000/(abs(min_y) + max_y); 
+	int echelle_x = 1000/(abs(min_x) + max_x);// add max because change in x after;
+	int echelle_y = 1000/(abs(min_y) + max_y);
+	printf("max x  %d max y %d \n", (2000 - (abs(min_x) + max_x) * echelle_x)/2 ,(1500 - (abs(min_y) + max_y) * echelle_y)/2);
 	line_number = 0;
 	while (line_number < n_points)
 	{ 
-		x_y_z_matrix[line_number][1] = (x_y_z_matrix[line_number][1] + abs(min_x)) * echelle_x + 300 ;//echlle in x
-		x_y_z_matrix[line_number][2] = (x_y_z_matrix[line_number][2] + abs(min_y)) * 5 + 500;//echlle in y 
-		printf("|_x %d y %d |____\n", x_y_z_matrix[line_number][1],x_y_z_matrix[line_number][2]);
+		x_y_z_matrix[line_number][1] = (x_y_z_matrix[line_number][1] + abs(min_x)) * echelle_x + (2000 - (abs(min_x) + max_x) * echelle_x)/2;//echlle in x
+		x_y_z_matrix[line_number][2] = (x_y_z_matrix[line_number][2] + abs(min_y)) * echelle_y + (1500 - (abs(min_y) + max_y) * echelle_y)/2;//echlle in y
 		line_number++;
 	}
-	printf("min_x %d min_y %d  %d \n", min_x,min_y, add);
-	printf("max_x %d max_y %d \n", max_x,max_y);
-	 //exit(0);
-	 //print matrix
+	print_matrix(x_y_z_matrix);
 }
 
 void drawing_points(int **x_y_z_matrix , int length_line , int n_points)
@@ -107,45 +154,45 @@ void drawing_points(int **x_y_z_matrix , int length_line , int n_points)
 	int		line_number;
 	void 	*mlx_win;
 	void	*mlx;
+	
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1500,1500, "FDF :)");
+	mlx_win = mlx_new_window(mlx, 2000,1500, "FDF :)");
 	line_number = 0;
 	color = 0x1cc738;;
 	while (x_y_z_matrix[line_number])
 	{
 		if( line_number > 0 && line_number % length_line != 0)
 		{
-			if (x_y_z_matrix[line_number][3] > 0 && x_y_z_matrix[line_number - 1][3] > 0)
-				color = 0xed0c0c;
+			if (x_y_z_matrix[line_number][3] > 0 && x_y_z_matrix[line_number - 1][3] > 0  && x_y_z_matrix[line_number][4] == 0x49eb34)
+				color = 0xe3091b ;
 			else
-				color = 0x1cc738;
+				color = x_y_z_matrix[line_number][4];
 			bre_algori(mlx, mlx_win, x_y_z_matrix[line_number - 1][1],x_y_z_matrix[line_number - 1][2],x_y_z_matrix[line_number][1],x_y_z_matrix[line_number][2], color);
 		}
 		if (line_number < n_points -length_line)
 		{
-			if (x_y_z_matrix[line_number][3] > 0 && x_y_z_matrix[line_number + length_line][3] > 0)
-				color = 0xed0c0c;
+			if (x_y_z_matrix[line_number][3] > 0 && x_y_z_matrix[line_number + length_line][3] > 0 && x_y_z_matrix[line_number][4] == 0x49eb34)
+				color = 0xe3091b;
 			else
-				color = 0x1cc738;
+				color = x_y_z_matrix[line_number][4];
 			bre_algori(mlx, mlx_win, x_y_z_matrix[line_number][1],x_y_z_matrix[line_number][2], x_y_z_matrix[line_number + length_line][1],x_y_z_matrix[line_number + length_line][2],color);
 		}
 		line_number++;
 	}
-	 mlx_loop(mlx);
+	mlx_loop(mlx);
 }
 
-int  *array_split(char **split_arr ,int size) //split array in defirrent time u get the , for get coler
+
+void erros_functions(char **argv)
 {
-	int i = 0;
-	int *z_array;
+	int length;
 	
-	
-	while (split_arr[i])
+	length = ft_strlen(argv[1]) - 4;
+	if (ft_strncmp(".fdf",argv[1] + length,5) != 0 )
 	{
-		z_array[i] = ft_atoi(split_arr[i]);
-		i++;
+		ft_putstr_fd(" Error ./fdf",2);
+		exit(1);
 	}
-	return (z_array);
 }
 
 int	main(int argc ,char **argv)
@@ -160,16 +207,19 @@ int	main(int argc ,char **argv)
 	t_list	*node;
 	
 	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+	{
+		perror(argv[1]);
+		exit(0);
+	}
 	nbr_lin = 0;
-	
 	if (argc != 2)
 	{
-		printf("<>|<>\n");
-		printf(" <i>\n");
+		printf(" <filename .fdf> \n");
 		return (1);
 	}
+	erros_functions(argv);
 	list_line = 0;
-	
 	nbr_lin	  = 0;
 	while (1)
 	{
@@ -180,11 +230,10 @@ int	main(int argc ,char **argv)
 			break ;
 		nbr_lin++;
 	}
-	line_number = 0;
 	length_line = 0;
 	x_y_z_matrix = check_list(list_line , &length_line);
 	//print_matrix(x_y_z_matrix);
-	//printf("  __________ %d", length_line * nbr_lin);
+	// printf("  __________ %d", length_line * nbr_lin);
 	int n_points = length_line * nbr_lin;
 	isometric_projection(x_y_z_matrix, length_line,n_points);
 	drawing_points(x_y_z_matrix, length_line, n_points);
