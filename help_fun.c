@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:44:37 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/03/23 09:38:26 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/03/24 18:23:04 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int *bre_algori(void *mlx,void *mlx_win,int x0, int y0, int x1, int y1, int cole
 		 	mlx_pixel_put(mlx, mlx_win ,x0 ,y0 , coler);
 		//  mlx_mouse_move(mlx,x0,y0);
 		//  mlx_mouse_hook(void *win_ptr, int (*f)(), void *param);
+		// for coloer i can do it with
         if( x0 == x1 && y0 == y1)
 			break;
         int e2 = 2 * error;

@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 06:40:26 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/03/23 12:14:10 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:20:58 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void isometric_projection(int **x_y_z_matrix, int length_line, int n_points)
 		 if (x > max_x)
 			max_x = x;	 
 	 // we must change this to index for get a dynamically  f logic thanks :) 
-		y = ((x_y_z_matrix[line_number][1] + (x_y_z_matrix[line_number][2]) * 1) - x_y_z_matrix[line_number][3]); //+300 for to down in y * 11 and tjpd lmap 
+		y = ((x_y_z_matrix[line_number][1] + (x_y_z_matrix[line_number][2]) * -12) - x_y_z_matrix[line_number][3]); //+300 for to down in y * 11 and tjpd lmap 
 		 if (y < min_y && y < 0)
 			min_y = y; // +300
 		 if (y > max_y)
