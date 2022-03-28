@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 08:07:22 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/03/21 19:01:43 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/03/27 08:28:45 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,6 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 #include "libft.h"
-// typedef struct point_xyz
-// {
-// 	int x;
-// 	int y;
-// 	int z;
-// 	int coler;
-// }	point_xyz;
-
-// typedef struct s_list
-// {
-// 	void			*content;
-// 	void 			*x;
-// 	void			*y;
-// 	void			*z;
-// 	void			*coler;
-// 	struct s_list	*next;
-// }	t_list;
 
 typedef struct s_list
 {
@@ -50,26 +33,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-int		ft_printf(const char *n, ...);
-int		convert_hex_long_ptr(size_t a, int address);
-int		ft_print_memory(void *addr, int address);
-void	ft_putchar_fd(char c, int fd);
 
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int ft_strlen_d(char **arr_split);
-void	free_function(char **str);
-int  **check_list(t_list *list, int *length_line);
-void print_matrix(int **x_y_z_matrix);
-void x_y_z_c_function(char **split_line, int nbr_lin,int **x_y_z_matrix);
-int *bre_algori(void *mlx,void *mlx_win,int x1, int y1, int x2, int y2, int coler);
 int		ft_isalpha(int a);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
