@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:44:37 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/03/27 10:22:14 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/01 07:43:49 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int *bre_algori(t_point ab, int color ,t_data *img)
     while(1)
     {   
 		my_mlx_pixel(img, ab.x0, ab.y0, color);
-		if( ab.x0 == ab.x1 && y0 == y1)
+		if( ab.x0 == ab.x1 && ab.y0 == ab.y1)
 			break;
 		int e2 = 2 * error;
 		if (e2 >= dy)
@@ -80,7 +80,7 @@ int *bre_algori(t_point ab, int color ,t_data *img)
 		}
 		return 0;
 	}
-
+	
 void del(void *ptr)
 {
 	 free(ptr);
