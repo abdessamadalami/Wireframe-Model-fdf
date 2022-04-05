@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 08:27:43 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/01 08:43:35 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/05 16:08:22 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct	s_norm {
 }				t_norm;
 
 typedef struct	s_data {
+	int 	l_length;
 	void 	*mlx_win;
 	void	*mlx;
 	void	*img;
@@ -51,8 +52,10 @@ typedef struct	s_data {
 typedef struct s_point {
 	int x0;
 	int y0;
+	int color_0;
 	int x1;
 	int y1;
+	int color_1;
 }		t_point;
 
 
@@ -61,8 +64,17 @@ typedef struct	s_vars {
 	void	*win;
 }				t_vars;
 
+typedef struct	s_rgb {
+	int		d_r;
+	int		d_g;
+	int		d_b;
+}				t_rgb;
 
-
+int	ft_strchr_int(const char *str, int c);
+int		max(int num1, int num2);
+t_rgb	get_deffrent(int color,int color2,int div);
+void 	get_color(int *color, t_rgb d);
+void	copy_d(t_data *img);
 int		key_hook(int keycode, t_data *vars);
 int		ft_printf(const char *n, ...);
 int		convert_hex_long_ptr(size_t a, int address);
@@ -75,8 +87,8 @@ int 	**check_list(t_list *list, int *length_line);
 void	print_matrix(int **x_y_z_matrix);
 void	x_y_z_c_function(char **split_line, int nbr_lin,int **x_y_z_matrix);
 int		*bre_algori(t_point ab, int coler,t_data *img);
-void	isometric_projection(int **x_y_z_matrix, int length_line, int n_points,t_data *img);
-void	drawing_points(int **x_y_z_matrix , int length_line , int n_points,t_data *img);
+void	isometric_projection(t_data *img);
+void	drawing_points(t_data *img);
 void	erros_functions(char **argv);
 int		check_file_argument(char **argv, int argc);
 void	centre_fun(t_data *img);

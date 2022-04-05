@@ -154,6 +154,12 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
+typedef struct	s_rgb {
+	int		d_r;
+	int		d_g;
+	int		d_b;
+}				t_rgb;
+
 void	my_mlx_pixel(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -161,16 +167,38 @@ void	my_mlx_pixel(t_data *data, int x, int y, int color)
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
+void  black_baground(t_data *vars)
+{
+	int index;
+	int j;
+
+	index = 0;
+	j = 0;
+	while (index < 1920)
+	{ 
+		j = 0;
+		while(j < 1080)
+		{
+			mlx_pixel_put(vars->mlx,vars->mlx_win, index,j,0x810202);
+			j++;
+		}
+		index++;
+	}
+}
 
 int	key_hook(int keycode, t_data *vars)
 {
 	static int i;
+	t_data	img;
+
+		
 	if (keycode == 53)
 		exit(0);
 	if (keycode == 69)
 	{
-		mlx_string_put(vars -> mlx, vars->mlx_win, 50 + i,i,0x810202, "df");	
-		i++;
+		black_baground(vars);
+		//	mlx_pixel_put(vars->mlx,vars->mlx_win, 50 + i,i,0x810202);
+	
 	}
 		// my_mlx_pixel(vars, 5 + i, 5 + i, 0x810202);
 		// my_mlx_pixel(vars, 5 + i + 300, 5 + i + 120, 0x810202);
@@ -180,32 +208,62 @@ int	key_hook(int keycode, t_data *vars)
 		// drawing_points(vars -> x_y_z_old , vars -> line_length , vars -> n_points,vars);
 		//mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars -> img, 0, 0);
 	
-	printf(" %d \n",keycode); // + == 69 - = 78
+	//printf(" %d \n",keycode); // + == 69 - = 78
 	return (0);
 }
+
+ t_rgb get_deffrent(int color,int color2)
+ {
+	t_rgb a;
+
+	a.d_r = (abs(color2/(256 * 256)) -  abs(color/(256 * 256)))/21;
+	a.d_g = (abs((color2/256) % 256) - abs((color/256) % 256))/21;
+	a.d_b = (abs(color2 % 256) - abs(color % 256))/21; //diffent
+
+	return a;
+ }
+
+void get_color(int *color, t_rgb d)
+{
+	int r,g,b;
+	r = abs(*color/(256 * 256)) + d.d_r;
+	g = abs((*color/256) % 256) + d.d_g;
+	b = abs(*color % 256) + d.d_b;
+
+	*color = 256 * 256 * r + 256 * g + b;
+}
+
+
 
 int	main(void)
 {
 	
 	t_data	img;
+	t_rgb d_color;
 
 	img.mlx = mlx_init();
 	img.mlx_win = mlx_new_window(img.mlx, 1920, 1080, "Hello world!");
 	img.img = mlx_new_image(img.mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
-    int i = 0;
-	while (i < 400)
+	int i = 0;
+	//c1 add 3 colum to array for rgb color and function to convert rgb to hexa
+	//c2 convert color to hexa and get rgb and make the coler and put it to 
+	
+	int color1 = 0xfa2f2f;
+	int color = 0x0bb511;
+	d_color = get_deffrent(color,color1);
+	printf(" %d %d %d \n",d_color.d_r,d_color.d_g,d_color.d_b);
+	while (i < 21)
 	{
-		my_mlx_pixel(&img, 5 + i, 5 + i, 0x810202);
-		my_mlx_pixel(&img, 5 + i + 300, 5 + i + 120, 0x810202);
-		
+		my_mlx_pixel(&img, 5 + i, 5 + i, color);
+		my_mlx_pixel(&img, 5 + i + 300, 5 + i + 120, color);
+		get_color(&color,d_color);
 		i++;
 	}
-	i = 0;
-	char *ptr;
-	ptr = img.img;
-	 mlx_key_hook(img.mlx_win, key_hook, &img);
-	mlx_put_image_to_window(img.mlx, img.mlx_win, ptr, 0, 0);
+
+
+	mlx_key_hook(img.mlx_win, key_hook, &img);
+	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img, 0, 0);
 	mlx_loop(img.mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 08:26:45 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/01 08:40:43 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:55:07 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,14 @@ int	main(int argc ,char **argv)
 	n_points = length_line * nbr_lin;
 	img.x_y_z_matrix = x_y_z_matrix;
 	img.n_points = n_points;
-	img.line_length = length_line;
-	img.screnn.zoom_x = 100;
-	img.screnn.zoom_y = 300;
-	isometric_projection(x_y_z_matrix, length_line,n_points,&img);
-	drawing_points(img.x_y_z_matrix, length_line, n_points,&img);
+	img.l_length = length_line;
+	img.screnn.zoom_x = 800;
+	img.screnn.zoom_y = 1000;
+	img.screnn.x_length = 2000;
+	img.screnn.y_length = 1500;
+	copy_d(&img);
+	isometric_projection(&img);
 	
 	// mlx_put_image_to_window(img.mlx, img.mlx_win, img.img, 0, 0);
-	 mlx_key_hook(img.mlx_win, key_hook, &img);
 	// mlx_loop(img.mlx);
 }

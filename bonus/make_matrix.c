@@ -6,12 +6,68 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 08:49:55 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/03/27 08:50:11 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/05 16:07:13 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include"libft.h"
 #include "fdf.h"
+
+int to_decimal(char *str)
+{
+	int i;
+	char c;
+	int nbr;
+	int len;
+	char *hix="0123456789abcdef";
+	
+	i = 0; 
+	c = 0;
+	nbr = 0;
+	if (str[0] == '0' && str[1] == 'x')
+		str = str + 2;
+ 	len = ft_strlen(str) - 1;
+	while(str[i] != '\0')
+	{
+		c =  ft_tolower(str[i]);
+		nbr = nbr + ft_strchr_int(hix, c) * pow(16, len);
+		i++;
+		len--;
+	}
+	return nbr;
+}
+
+void x_y_z_c_function(char **split_line, int nbr_lin,int **x_y_z_matrix)
+{
+	int index;
+	char **split_z;
+	static int i;
+	
+	index = 0;
+	while(split_line[index] != 0)
+	{
+		 x_y_z_matrix[i] = malloc(6 * sizeof(int));
+		 x_y_z_matrix[i][0] = i; 
+		 x_y_z_matrix[i][1] = index ; //echelle
+		 x_y_z_matrix[i][2]	= nbr_lin; 
+		 split_z = ft_split(split_line[index],',');
+		
+		if (split_z[0] != 0)
+			x_y_z_matrix[i][3] = ft_atoi(split_z[0]);
+		if (split_z[1] != 0)
+			x_y_z_matrix[i][4] = to_decimal(split_z[1]);		
+		else if (x_y_z_matrix[i][3] > 0)
+			x_y_z_matrix[i][4] = 0xf70c2c;
+		else
+			x_y_z_matrix[i][4] = 0x49eb34;
+		if (x_y_z_matrix[i][3] > 0)
+			x_y_z_matrix[i][5] = 1;
+		else
+			x_y_z_matrix[i][5] = 0; 
+		i++;
+		index++;
+	}
+}
 
 int  **check_list(t_list *list, int *length_line)
 {
