@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 08:27:43 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/05 16:08:22 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/06 14:59:44 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ typedef struct	s_vars {
 }				t_vars;
 
 typedef struct	s_rgb {
-	int		d_r;
-	int		d_g;
-	int		d_b;
+	float		d_r;
+	float		d_g;
+	float		d_b;
 }				t_rgb;
 
 int	ft_strchr_int(const char *str, int c);
@@ -86,7 +86,7 @@ void	free_function(char **str);
 int 	**check_list(t_list *list, int *length_line);
 void	print_matrix(int **x_y_z_matrix);
 void	x_y_z_c_function(char **split_line, int nbr_lin,int **x_y_z_matrix);
-int		*bre_algori(t_point ab, int coler,t_data *img);
+int		*bre_algori(t_point ab,t_data *img,int z1,int z2);
 void	isometric_projection(t_data *img);
 void	drawing_points(t_data *img);
 void	erros_functions(char **argv);

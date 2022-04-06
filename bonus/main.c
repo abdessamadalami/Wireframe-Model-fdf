@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 08:26:45 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/05 15:55:07 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/06 08:14:15 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ int	main(int argc ,char **argv)
 	img.x_y_z_matrix = x_y_z_matrix;
 	img.n_points = n_points;
 	img.l_length = length_line;
-	img.screnn.zoom_x = 800;
-	img.screnn.zoom_y = 1000;
+	img.screnn.zoom_x = 500;
+	img.screnn.zoom_y = 600;
 	img.screnn.x_length = 2000;
 	img.screnn.y_length = 1500;
 	copy_d(&img);

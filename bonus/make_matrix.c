@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 08:49:55 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/05 16:07:13 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/06 14:14:41 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void x_y_z_c_function(char **split_line, int nbr_lin,int **x_y_z_matrix)
 		if (split_z[1] != 0)
 			x_y_z_matrix[i][4] = to_decimal(split_z[1]);		
 		else if (x_y_z_matrix[i][3] > 0)
-			x_y_z_matrix[i][4] = 0xf70c2c;
+			x_y_z_matrix[i][4] = 0x810202;
 		else
-			x_y_z_matrix[i][4] = 0x49eb34;
+			x_y_z_matrix[i][4] = 0xffffff;
 		if (x_y_z_matrix[i][3] > 0)
 			x_y_z_matrix[i][5] = 1;
 		else

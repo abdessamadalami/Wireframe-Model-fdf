@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 17:18:28 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/05 15:27:50 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/06 15:01:28 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ void	my_mlx_pixel(t_data *data, int x, int y, int color)
 // {}
 
 
-int *bre_algori(t_point ab, int color ,t_data *img)
+int *bre_algori(t_point ab ,t_data *img , int z1,int z2)
   { 
 	static int index;
+	int color;
 	int dx;
 	int sx ;
 	int dy;
@@ -40,14 +41,21 @@ int *bre_algori(t_point ab, int color ,t_data *img)
     dy = -abs(ab.y1 - ab.y0);
    	sy = (ab.y0 < ab.y1) ? 1 : -1;
     error = dx + dy;
-	d_color = get_deffrent(color ,0x0b32de ,max(abs(dx) ,abs(dy)));
-//	printf(" ------- dx %d dy %d color_0 %d color_1 %d \n",dx,dy,ab.color_0,ab.color_1);
-printf("%d %d %d c %d t %d\n",d_color.d_r,d_color.d_g,d_color.d_b,color,0x49eb34);
-//exit(0);
+	color = ab.color_0;
+	d_color = get_deffrent(color ,ab.color_1,max(abs(dx) ,abs(dy)));
+	
+	printf(" ------- dx %d dy %d color_0 %d color_1 %d d_r %f\n",dx,dy,ab.color_0,ab.color_1,d_color.d_r);
+//exit(0);//489 point
+int is = 0;
+
     while(1)
-    {   
-		//my_mlx_pixel(img, ab.x0, ab.y0, color);
-		//printf("i %d x %d y %d \n",i,ab.x0, ab.y0);
+    {
+		if(z1 == 0 && z2 != 0)
+		{
+			// get_color(&color,d_color);
+			// printf(" %d ",ab.color_1);
+			color = 0xfff585;
+		}
 		my_mlx_pixel(img, ab.x0, ab.y0, color);
 		if( ab.x0 == ab.x1 && ab.y0 == ab.y1)
 			break;
@@ -67,7 +75,8 @@ printf("%d %d %d c %d t %d\n",d_color.d_r,d_color.d_g,d_color.d_b,color,0x49eb34
 			ab.y0 = ab.y0 + sy;
 		}
 			i++;
-			get_color(&color,d_color);
 	}
+	index++;
+//	printf(" i: %d %f %f %f \n ",i,d_color.d_r,d_color.d_g,d_color.d_b);
 	return 0;
 }

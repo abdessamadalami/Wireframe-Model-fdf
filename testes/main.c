@@ -155,9 +155,9 @@ typedef struct	s_data {
 }				t_data;
 
 typedef struct	s_rgb {
-	int		d_r;
-	int		d_g;
-	int		d_b;
+	float		d_r;
+	float		d_g;
+	float		d_b;
 }				t_rgb;
 
 void	my_mlx_pixel(t_data *data, int x, int y, int color)
@@ -216,20 +216,20 @@ int	key_hook(int keycode, t_data *vars)
  {
 	t_rgb a;
 
-	a.d_r = (abs(color2/(256 * 256)) -  abs(color/(256 * 256)))/21;
-	a.d_g = (abs((color2/256) % 256) - abs((color/256) % 256))/21;
-	a.d_b = (abs(color2 % 256) - abs(color % 256))/21; //diffent
-
+	a.d_r = ((float)((color2/(256 * 256))) -  (color/(256 * 256))) /408;
+	a.d_g = ((float)(((color2/ 256) % 256)) - ((color/256) % 256)) /408;
+	a.d_b = ((float)((color2 % 256)) - (color % 256)) /408; //diffent
+	printf("%f %f %f \n",a.d_b,a.d_g,a.d_r);
 	return a;
  }
 
 void get_color(int *color, t_rgb d)
 {
-	int r,g,b;
-	r = abs(*color/(256 * 256)) + d.d_r;
-	g = abs((*color/256) % 256) + d.d_g;
-	b = abs(*color % 256) + d.d_b;
-
+	float r,g,b;
+	r = (*color/(256 * 256)) + d.d_r;
+	g = ((*color/256) % 256) + d.d_g;
+	b = (*color % 256) + d.d_b;
+//	printf(" %f %f %f  d  %f %f %f \n",r,g,b,d.d_r,d.d_g,d.d_b);
 	*color = 256 * 256 * r + 256 * g + b;
 }
 
@@ -249,19 +249,25 @@ int	main(void)
 	int i = 0;
 	//c1 add 3 colum to array for rgb color and function to convert rgb to hexa
 	//c2 convert color to hexa and get rgb and make the coler and put it to 
+
+
 	
-	int color1 = 0xfa2f2f;
-	int color = 0x0bb511;
+	int color = 0xffffff;
+	int color1 = 0x004bbd;
 	d_color = get_deffrent(color,color1);
-	printf(" %d %d %d \n",d_color.d_r,d_color.d_g,d_color.d_b);
-	while (i < 21)
+	printf("%f %f %f \n",d_color.d_r,d_color.d_g,d_color.d_b);
+	// 256 * 256 * r + 256 * g + b
+	//printf(" %f ", (256 * 256) * -0.507157 * 489 -0.521472 * 489 * 256 - 0.521472 * 489);
+	while (i < 408)
 	{
 		my_mlx_pixel(&img, 5 + i, 5 + i, color);
-		my_mlx_pixel(&img, 5 + i + 300, 5 + i + 120, color);
+		my_mlx_pixel(&img, 5 + i + 30, 5 + i + 20, color);
 		get_color(&color,d_color);
+		//color1 = color1 - 339967;
+		//printf(" %d \n",color1);
 		i++;
 	}
-
+	printf("%d",color);
 
 	mlx_key_hook(img.mlx_win, key_hook, &img);
 	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img, 0, 0);
