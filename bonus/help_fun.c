@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:44:37 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/03 17:20:23 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/15 07:39:42 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,31 @@ void del(void *ptr)
 	 free(ptr);
 }
 
-void	free_function(char **str)
+void	copy_d(t_data *img)
+{
+	int line_number;
+
+	line_number = 0;
+	img -> x_y_z_old = malloc(img -> n_points * sizeof(int **));
+	if (img -> x_y_z_old == NULL)
+	{
+		ft_putstr_fd("allocation problem\n", 2);
+		return ;
+	}
+	while (line_number < img -> n_points)
+	{ 
+		img ->  x_y_z_old[line_number] = malloc(6 * sizeof(int));
+		img ->  x_y_z_old[line_number][0] = img -> x_y_z_matrix[line_number][0];
+		img ->  x_y_z_old[line_number][1] = img -> x_y_z_matrix[line_number][1];
+		img ->  x_y_z_old[line_number][2] = img -> x_y_z_matrix[line_number][2];
+		img ->  x_y_z_old[line_number][3] = img -> x_y_z_matrix[line_number][3];
+		img ->  x_y_z_old[line_number][4] = img -> x_y_z_matrix[line_number][4];
+		img ->  x_y_z_old[line_number][5] = img -> x_y_z_matrix[line_number][5];
+		line_number++;
+	}
+}
+
+void	free_function(void **str)
 {
 	int	i;
 

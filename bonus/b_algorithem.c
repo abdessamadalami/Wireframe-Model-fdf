@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 17:18:28 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/06 15:01:28 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/11 16:03:46 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 void	my_mlx_pixel(t_data *data, int x, int y, int color)
 {
 	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	if(x < data -> screnn.x_length && y < data -> screnn.y_length)
+	{
+		dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+		*(unsigned int*)dst = color;
+	}
 }
-
-// int get_coler(int a,int index)
-// {}
-
-
+// color in other order;
 int *bre_algori(t_point ab ,t_data *img , int z1,int z2)
   { 
 	static int index;
@@ -42,20 +40,18 @@ int *bre_algori(t_point ab ,t_data *img , int z1,int z2)
    	sy = (ab.y0 < ab.y1) ? 1 : -1;
     error = dx + dy;
 	color = ab.color_0;
-	d_color = get_deffrent(color ,ab.color_1,max(abs(dx) ,abs(dy)));
+	//color in stactv not used 
+	d_color = get_deffrent(color,ab.color_1,max(abs(dx) ,abs(dy)));
 	
-	printf(" ------- dx %d dy %d color_0 %d color_1 %d d_r %f\n",dx,dy,ab.color_0,ab.color_1,d_color.d_r);
 //exit(0);//489 point
 int is = 0;
 
     while(1)
     {
-		if(z1 == 0 && z2 != 0)
-		{
-			// get_color(&color,d_color);
-			// printf(" %d ",ab.color_1);
-			color = 0xfff585;
-		}
+		//if((z1 == 0 && z2 != 0 )|| (z2 == 0 && z1 != 0))
+			get_color(&color,d_color);
+		// if(z1 != 0 && z2 != 0 )
+		// 	color = 0xff0000;
 		my_mlx_pixel(img, ab.x0, ab.y0, color);
 		if( ab.x0 == ab.x1 && ab.y0 == ab.y1)
 			break;
