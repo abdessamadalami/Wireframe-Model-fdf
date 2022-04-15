@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 08:49:55 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/15 07:33:10 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/15 07:44:05 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ int	to_decimal(char *str)
 	return (nbr);
 }
 
-static void	color_split(char **split_z, int **x_y_z_matrix, int i)
+static void	color_split(char **split_z, int **xyz_m, int i)
 {
 	if (split_z[0] != 0)
-		x_y_z_matrix[i][3] = ft_atoi(split_z[0]);
+		xyz_m[i][3] = ft_atoi(split_z[0]);
 	if (split_z[1] != 0)
-		x_y_z_matrix[i][4] = to_decimal(split_z[1]);
-	else if (x_y_z_matrix[i][3] > 0)
-		x_y_z_matrix[i][4] = 0xff0000;
+		xyz_m[i][4] = to_decimal(split_z[1]);
+	else if (xyz_m[i][3] > 0)
+		xyz_m[i][4] = 0xff0000;
 	else
-		x_y_z_matrix[i][4] = 0xffffff;
+		xyz_m[i][4] = 0xffffff;
 }
 
-void	x_y_z_c_function(char **split_line, int nbr_lin, int **x_y_z_matrix)
+void	x_y_z_c_function(char **split_line, int nbr_lin, int **xyz_m)
 {
 	int			index;
 	char		**split_z;
@@ -58,16 +58,16 @@ void	x_y_z_c_function(char **split_line, int nbr_lin, int **x_y_z_matrix)
 	index = 0;
 	while (split_line[index] != 0)
 	{
-		x_y_z_matrix[i] = malloc(6 * sizeof(int));
-		x_y_z_matrix[i][0] = i;
-		x_y_z_matrix[i][1] = index;
-		x_y_z_matrix[i][2] = nbr_lin;
+		xyz_m[i] = malloc(6 * sizeof(int));
+		xyz_m[i][0] = i;
+		xyz_m[i][1] = index;
+		xyz_m[i][2] = nbr_lin;
 		split_z = ft_split(split_line[index], ',');
-		color_split(split_z, x_y_z_matrix, i);
-		if (x_y_z_matrix[i][3] > 0)
-			x_y_z_matrix[i][5] = 1;
+		color_split(split_z, xyz_m, i);
+		if (xyz_m[i][3] > 0)
+			xyz_m[i][5] = 1;
 		else
-			x_y_z_matrix[i][5] = 0;
+			xyz_m[i][5] = 0;
 		i++;
 		index++;
 	}

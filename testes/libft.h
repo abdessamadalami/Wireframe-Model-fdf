@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 08:07:22 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/03/26 08:35:53 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/15 08:09:01 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void	ft_putchar_fd(char c, int fd);
 int ft_strlen_d(char **arr_split);
 void	free_function(char **str);
 int  **check_list(t_list *list, int *length_line);
-void print_matrix(int **x_y_z_matrix);
-void x_y_z_c_function(char **split_line, int nbr_lin,int **x_y_z_matrix);
-int *bre_algori(void *mlx,void *mlx_win,int x1, int y1, int x2, int y2, int coler);
+void print_matrix(int **xyz_m);
+void x_y_z_c_function(char **split_line, int nbr_lin,int **xyz_m);
+int *bre_algori(void *mlx,void *m_win,int x1, int y1, int x2, int y2, int coler);
 int		ft_isalpha(int a);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);

@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 08:26:45 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/15 07:31:17 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/15 08:09:01 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int check_file_argument(char **argv, int argc)
 void make_win(t_data *img)
 {
 	img -> mlx = mlx_init();
-	img -> mlx_win = mlx_new_window(img->mlx, 2000,1150, "FDF :)");
+	img -> m_win = mlx_new_window(img->mlx, 2000,1150, "FDF :)");
 	img -> img = mlx_new_image(img->mlx, 2000, 1150);
 	img -> screnn.z_index = 4;
 	img-> screnn.x_length = 2000;
@@ -79,7 +79,7 @@ int	main(int argc ,char **argv)
 		nbr_lin++;
 	}
 	free(line);
-	img.x_y_z_matrix = check_list(list_line , &length_line , nbr_lin);
+	img.xyz_m = check_list(list_line , &length_line , nbr_lin);
 	img.n_points = length_line * nbr_lin;
 	img.l_length = length_line;
 	copy_d(&img);

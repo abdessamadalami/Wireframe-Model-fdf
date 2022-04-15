@@ -6,20 +6,20 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:44:37 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/03/27 10:22:14 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/15 07:44:05 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include"libft.h"
 #include "fdf.h"
 
-void print_matrix(int **x_y_z_matrix)
+void print_matrix(int **xyz_m)
 {
 	int i;
 	i = 0;
-	while(x_y_z_matrix[i] != 0)
+	while(xyz_m[i] != 0)
 	{
-		printf(" index  %d x %d y %d  z  %d color %d  \n",x_y_z_matrix[i][0],x_y_z_matrix[i][1],x_y_z_matrix[i][2],x_y_z_matrix[i][3] ,x_y_z_matrix[i][4]);
+		printf(" index  %d x %d y %d  z  %d color %d  \n",xyz_m[i][0],xyz_m[i][1],xyz_m[i][2],xyz_m[i][3] ,xyz_m[i][4]);
 		i++;
 	}
 }
@@ -86,13 +86,13 @@ void del(void *ptr)
 	 free(ptr);
 }
 
-void print_f(char **x_y_z_matrix)
+void print_f(char **xyz_m)
 {
 	int i = 0;
 	printf(" split of content \n");
-	while(x_y_z_matrix[i])
+	while(xyz_m[i])
 	{
-		printf(" %s ",x_y_z_matrix[i]);
+		printf(" %s ",xyz_m[i]);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 08:26:45 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/03/27 08:44:15 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/15 07:44:05 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int check_file_argument(char **argv, int argc)
 
 int	main(int argc ,char **argv)
 {
-	int		**x_y_z_matrix;
+	int		**xyz_m;
 	int		nbr_lin;
 	int		length_line;
 	char	*line;
@@ -71,8 +71,8 @@ int	main(int argc ,char **argv)
 			break ;
 		nbr_lin++;
 	}
-	x_y_z_matrix = check_list(list_line , &length_line);
+	xyz_m = check_list(list_line , &length_line);
 	n_points = length_line * nbr_lin;
-	isometric_projection(x_y_z_matrix, length_line,n_points);
-	drawing_points(x_y_z_matrix, length_line, n_points);
+	isometric_projection(xyz_m, length_line,n_points);
+	drawing_points(xyz_m, length_line, n_points);
 }

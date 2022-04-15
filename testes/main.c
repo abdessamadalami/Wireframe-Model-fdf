@@ -63,7 +63,7 @@ int	main(void)
 // 	void	*img;
 // 	char	*addr;
 // 	void	*mlx;
-// 	void	*mlx_win;
+// 	void	*m_win;
 // 	int		bits_per_pixel;
 // 	int		line_length;
 // 	int		endian;
@@ -94,7 +94,7 @@ int	main(void)
 // 		j = 0;
 // 		while(j < 1080)
 // 		{
-// 			mlx_pixel_put(vars->mlx,vars->mlx_win, index,j,0x810202);
+// 			mlx_pixel_put(vars->mlx,vars->m_win, index,j,0x810202);
 // 			j++;
 // 		}
 // 		index++;
@@ -112,16 +112,16 @@ int	main(void)
 // 	if (keycode == 69)
 // 	{
 // 		black_baground(vars);
-// 		//	mlx_pixel_put(vars->mlx,vars->mlx_win, 50 + i,i,0x810202);
+// 		//	mlx_pixel_put(vars->mlx,vars->m_win, 50 + i,i,0x810202);
 	
 // 	}
 // 		// my_mlx_pixel(vars, 5 + i, 5 + i, 0x810202);
 // 		// my_mlx_pixel(vars, 5 + i + 300, 5 + i + 120, 0x810202);
 // 		//u must change this rabish code
-// 		// vars -> x_y_z_matrix = vars ->x_y_z_old;
-// 		// isometric_projection(vars -> x_y_z_old ,vars -> line_length , vars -> n_points,vars);
-// 		// drawing_points(vars -> x_y_z_old , vars -> line_length , vars -> n_points,vars);
-// 		//mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars -> img, 0, 0);
+// 		// vars -> xyz_m = vars ->xyz_old;
+// 		// isometric_projection(vars -> xyz_old ,vars -> line_length , vars -> n_points,vars);
+// 		// drawing_points(vars -> xyz_old , vars -> line_length , vars -> n_points,vars);
+// 		//mlx_put_image_to_window(vars->mlx, vars->m_win, vars -> img, 0, 0);
 	
 // 	//printf(" %d \n",keycode); // + == 69 - = 78
 // 	return (0);
@@ -154,7 +154,7 @@ int	main(void)
 // 	t_rgb d_color;
 
 // 	img.mlx = mlx_init();
-// 	img.mlx_win = mlx_new_window(img.mlx, 1920, 1080, "Hello world!");
+// 	img.m_win = mlx_new_window(img.mlx, 1920, 1080, "Hello world!");
 // 	img.img = mlx_new_image(img.mlx, 1920, 1080);
 // 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 // 								&img.endian);
@@ -178,7 +178,7 @@ int	main(void)
 // 		//printf(" %d \n",color1);
 // 		i++;
 // 	}
-// 	mlx_key_hook(img.mlx_win, key_hook, &img);
-// 	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img, 0, 0);
+// 	mlx_key_hook(img.m_win, key_hook, &img);
+// 	mlx_put_image_to_window(img.mlx, img.m_win, img.img, 0, 0);
 // 	mlx_loop(img.mlx);
 // }

@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:44:37 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/15 07:39:42 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/15 11:37:29 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ int ft_strlen_d(char **arr_split)
 		index++;
 	return index;
 }
-
-
-// void plotLine(int x0, int y0, int x1, int y1)
-
 	
 void del(void *ptr)
 {
@@ -36,25 +32,25 @@ void del(void *ptr)
 
 void	copy_d(t_data *img)
 {
-	int line_number;
+	int l_nbr;
 
-	line_number = 0;
-	img -> x_y_z_old = malloc(img -> n_points * sizeof(int **));
-	if (img -> x_y_z_old == NULL)
+	l_nbr = 0;
+	img -> xyz_old = malloc(img -> n_points * sizeof(int **));
+	if (img -> xyz_old == NULL)
 	{
 		ft_putstr_fd("allocation problem\n", 2);
 		return ;
 	}
-	while (line_number < img -> n_points)
+	while (l_nbr < img -> n_points)
 	{ 
-		img ->  x_y_z_old[line_number] = malloc(6 * sizeof(int));
-		img ->  x_y_z_old[line_number][0] = img -> x_y_z_matrix[line_number][0];
-		img ->  x_y_z_old[line_number][1] = img -> x_y_z_matrix[line_number][1];
-		img ->  x_y_z_old[line_number][2] = img -> x_y_z_matrix[line_number][2];
-		img ->  x_y_z_old[line_number][3] = img -> x_y_z_matrix[line_number][3];
-		img ->  x_y_z_old[line_number][4] = img -> x_y_z_matrix[line_number][4];
-		img ->  x_y_z_old[line_number][5] = img -> x_y_z_matrix[line_number][5];
-		line_number++;
+		img -> xyz_old[l_nbr] = malloc(6 * sizeof(int));
+		img -> xyz_old[l_nbr][0] = img -> xyz_m[l_nbr][0];
+		img -> xyz_old[l_nbr][1] = img -> xyz_m[l_nbr][1];
+		img -> xyz_old[l_nbr][2] = img -> xyz_m[l_nbr][2];
+		img -> xyz_old[l_nbr][3] = img -> xyz_m[l_nbr][3];
+		img -> xyz_old[l_nbr][4] = img -> xyz_m[l_nbr][4];
+		img -> xyz_old[l_nbr][5] = img -> xyz_m[l_nbr][5];
+		l_nbr++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 08:27:43 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/15 07:36:01 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/15 11:37:29 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_tra {
 }				t_tra;
 
 typedef struct	s_data {
-	void 	*mlx_win;
+	void 	*m_win;
 	void	*mlx;
 	t_tra	r;
 	int 	l_length;
@@ -52,8 +52,8 @@ typedef struct	s_data {
 	int		line_length;
 	int		endian;
 	int		n_points;
-	int		**x_y_z_matrix;
-	int		**x_y_z_old;
+	int		**xyz_m;
+	int		**xyz_old;
 }				t_data;
 
 typedef struct s_point {
@@ -64,6 +64,15 @@ typedef struct s_point {
 	int y1;
 	int color_1;
 }		t_point;
+
+typedef struct s_bre {
+	int dx;
+	int sx;
+	int dy;
+	int sy;
+	int error;
+	int e2;
+}		t_bre;
 
 
 typedef struct	s_vars {
@@ -98,10 +107,10 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		ft_strlen_d(char **arr_split);
 void	free_function(void **str);
 int 	**check_list(t_list *list, int *length_line,int line_nbr);
-void	print_matrix(int **x_y_z_matrix);
-void	x_y_z_c_function(char **split_line, int nbr_lin,int **x_y_z_matrix);
-int		*bre_algori(t_point ab,t_data *img,int z1,int z2);
-void	h_v_point(int index, int l_line ,int **x_y_z_matrix ,t_data *img);
+void	print_matrix(int **xyz_m);
+void	x_y_z_c_function(char **split_line, int nbr_lin,int **xyz_m);
+int		*bre_algori(t_point ab,t_data *img);
+void	h_v_point(int index, int l_line ,int **xyz_m ,t_data *img);
 void	isometric_projection(t_data *img);
 void	drawing_points(t_data *img);
 void	erros_functions(char **argv);
