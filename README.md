@@ -30,7 +30,14 @@ Some magic with mathematic for rotation in the FDF bonus
 ![](https://raw.githubusercontent.com/abdessamadalami/fdf_1337_42/main/screen/rotaion.png)
 
 ==============
+  
+
+https://github.com/abdessamadalami/fdf_1337_42/assets/42350345/ed48a844-cad4-4b82-8313-f028de27cfba
+
+
 ![](https://raw.githubusercontent.com/abdessamadalami/fdf_1337_42/main/screen/1337.png)
+![](https://raw.githubusercontent.com/abdessamadalami/fdf_1337_42/main/screen/mnt.png)
+![](https://raw.githubusercontent.com/abdessamadalami/fdf_1337_42/main/screen/mars.png)
 ![](https://raw.githubusercontent.com/abdessamadalami/fdf_1337_42/main/screen/42.png)
 
 
