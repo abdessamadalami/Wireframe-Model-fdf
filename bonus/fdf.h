@@ -21,8 +21,14 @@
 # include<sys/wait.h>
 # include <mlx.h>
 # include "get_next_line.h"
-# include "libft.h"
+# include "libft.h" 
 # define HIX "0123456789abcdef"
+
+
+
+
+
+
 
 typedef struct s_norm {
 	char	type_of;
