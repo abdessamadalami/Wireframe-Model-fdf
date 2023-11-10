@@ -6,13 +6,19 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 07:10:25 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/25 07:32:48 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/24 22:53:37 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "libft.h"
 #include "fdf.h"
+
+void	allocation_problem(void)
+{
+	ft_putstr_fd("allocation problem\n", 2);
+	exit(1);
+}
 
 t_point	to_stract(t_data *img, int index, char type)
 {
@@ -55,30 +61,6 @@ void	h_v_point(int index, int l_line, t_data *img)
 	}
 }
 
-void	drawing_polyline(int x, int y, t_data *vars)
-{
-	mlx_string_put(vars->mlx, vars->m_win, x, y, 0xffffff, ".");
-}
-
-void	put_image(t_data *vars)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < vars->screnn.x_length)
-	{
-		j = 1150;
-		while (j < 1250)
-		{
-			mlx_pixel_put(vars->mlx, vars -> m_win, i, j, 0x9D9F6D);
-			j++;
-		}
-		i++;
-	}
-	print_in(vars);
-}
-
 void	drawing_points(t_data *img)
 {
 	int	index;
@@ -95,11 +77,7 @@ void	drawing_points(t_data *img)
 		index++;
 	}
 	mlx_put_image_to_window(img->mlx, img->m_win, img->img, 0, 0);
-	put_image(img);
 	mlx_key_hook(img->m_win, key_hook, img);
-	mlx_hook(img -> m_win, 4, 0L, mouse_up, img);
-	mlx_hook(img -> m_win, 5, 0L, mouse_up, img);
-	mlx_hook(img -> m_win, 6, 0L, mouse_move, img);
-	mlx_hook(img-> m_win, 17, 1L << 0, close_d, img);
+	mlx_hook(img->m_win, 17, 1L << 0, close_d, img);
 	mlx_loop(img->mlx);
 }

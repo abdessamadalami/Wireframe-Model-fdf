@@ -6,67 +6,86 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 08:45:55 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/15 07:44:05 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/26 13:12:48 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "get_next_line.h"
 #include "libft.h"
 #include"fdf.h"
 
-int max(int num1, int num2)
+int	max(int num1, int num2)
 {
-    return (num1 > num2 ) ? num1 : num2; // ??
+	if (num1 > num2)
+		return (num1);
+	return (num2);
 }
 
-void centre_fun(int **xyz_m,int min_x,int max_x , int min_y , int  max_y)
+void	inisialise(t_data *img, int x, int y)
 {
-	int i;
-	int add;
-	int echelle_x;// add max because change in x after;
-	int echelle_y;
+	img -> screnn.max_x = x;
+	img -> screnn.min_x = x;
+	img -> screnn.max_y = y;
+	img -> screnn.min_y = y;
+}
 
-	i =  0;
-	add = max(abs(min_y),abs(min_x));
-	echelle_x = 1000/(abs(min_x) + max_x);// add max because change in x after;
-	echelle_y = 1000/(abs(min_y) + max_y);
-	while (xyz_m[i])
+void	min_max_fun(int *x, int *y, t_data *img)
+{
+	static int	i = 0;
+
+	if (i == 0)
+		inisialise(img, *x, *y);
+	if (img-> screnn.max_x < *x)
+		img->screnn.max_x = *x;
+	if (img-> screnn.max_y < *y)
+		img->screnn.max_y = *y;
+	if (img-> screnn.min_x > *x)
+		img->screnn.min_x = *x;
+	if (img-> screnn.min_y > *y)
+		img->screnn.min_y = *y;
+	i++;
+}
+
+void	centre_fun(t_data *img)
+{
+	int	i;
+	int	add;
+	int	e_x;
+	int	e_y;
+
+	i = 0;
+	add = max(abs(img->screnn.min_y), abs(img->screnn.min_x));
+	e_x = 1000 / (abs(img->screnn.min_x) + img->screnn.max_x);
+	e_y = 1000 / (abs(img->screnn.min_y) + img->screnn.max_y);
+	while (i < img-> n_points)
 	{
-		// (2000 - (abs(min_x) + max_x) * echelle_x)/2
-		//(1500 - (abs(min_y) + max_y) * echelle_y)/2
-		xyz_m[i][1] = (xyz_m[i][1] + abs(min_x)) * echelle_x + (2000 - (abs(min_x) + max_x) * echelle_x)/2;//echlle in x
-		xyz_m[i][2] = (xyz_m[i][2] + abs(min_y)) * echelle_y + (1500 - (abs(min_y) + max_y) * echelle_y)/2;//echlle in y
+		img->xyz_m[i][1] = (img->xyz_m[i][1] + abs(img->screnn.min_x)) * e_x
+			+(img -> screnn.x_length
+				- (abs(img->screnn.min_x) + img->screnn.max_x) * e_x) / 2;
+		img->xyz_m[i][2] = (img->xyz_m[i][2] + abs(img->screnn.min_y)) * e_y
+			+ (img -> screnn.y_length
+				- (abs(img->screnn.min_y) + img->screnn.max_y) * e_y) / 2;
 		i++;
 	}
-   	
 }
 
-void isometric_projection(int **xyz_m, int length_line, int n_points)
+void	isometric_projection(t_data *img)
 {
-	int line_number;
-	int x;
-	int y;
-	
-	line_number = 0;
-	int min_x,max_x,max_y,min_y;
-	min_x = max_x = max_y = min_y = 0;
-	while (line_number < n_points)
-	{ 
-		x = ((xyz_m[line_number][1] - xyz_m[line_number][2])); //* 10 + 300 for cancel negative number
-		 if (x < min_x && x < 0)
-			min_x = x; // +300
-		 if (x > max_x)
-			max_x = x;	 
-		y = ((xyz_m[line_number][1] + (xyz_m[line_number][2]) * -12) - xyz_m[line_number][3]);
-		if (y < min_y && y < 0)
-			min_y = y;
-		if (y > max_y)
-			max_y = y;
-		xyz_m[line_number][1] = x;
-		xyz_m[line_number][2] = y;
-		line_number++;
+	int	l_nbr;
+	int	x;
+	int	y;
+
+	l_nbr = 0;
+	while (l_nbr < img-> n_points)
+	{
+		x = ((img->xyz_m[l_nbr][1] - img->xyz_m[l_nbr][2]));
+		y = ((img->xyz_m[l_nbr][1] + (img->xyz_m[l_nbr][2]))
+				- img->xyz_m[l_nbr][3]);
+		img->xyz_m[l_nbr][1] = x;
+		img->xyz_m[l_nbr][2] = y;
+		min_max_fun(&img->xyz_m[l_nbr][1], &img->xyz_m[l_nbr][2], img);
+		l_nbr++;
 	}
-	centre_fun(xyz_m, min_x, max_x, min_y, max_y);
-	print_matrix(xyz_m);
+	centre_fun(img);
+	drawing_points(img);
 }

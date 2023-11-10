@@ -6,17 +6,11 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 17:18:28 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/23 07:05:50 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/23 21:23:32 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	allocation_problem(void)
-{
-	ft_putstr_fd("allocation problem\n", 2);
-	exit(1);
-}
 
 void	my_mlx_pixel(t_data *data, int x, int y, int color)
 {

@@ -6,44 +6,107 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 08:49:55 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/03/27 08:50:11 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/26 13:11:20 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include"libft.h"
+#include"libft.h"
 #include "fdf.h"
 
-int  **check_list(t_list *list, int *length_line)
+int	to_decimal(char *str)
 {
-	int line_nbr;
-	char **split_array;
-	char **array;
-	int nbr_lin;
-	int len;
-	int **x_y_z_c_array;
+	int		i;
+	char	c;
+	int		nbr;
+	int		len;
 
-	t_list *node;
+	i = 0;
+	c = 0;
+	nbr = 0;
+	if (str[0] == '0' && str[1] == 'x')
+		str = str + 2;
+	len = ft_strlen(str) - 1;
+	while (str[i] != '\0')
+	{
+		c = ft_tolower(str[i]);
+		nbr = nbr + ft_strchr_int(HIX, c) * pow(16, len);
+		i++;
+		len--;
+	}
+	return (nbr);
+}
+
+static void	color_split(char **split_z, int **xyz_m, int i )
+{
+	if (split_z[0] != 0)
+		xyz_m[i][3] = ft_atoi(split_z[0]);
+	if (split_z[1] != 0)
+		xyz_m[i][4] = to_decimal(split_z[1]);
+	else if (xyz_m[i][3] > 0)
+		xyz_m[i][4] = 0xff0000;
+	else
+		xyz_m[i][4] = 0xffffff;
+}
+
+void	x_y_z_c_function(char **split_line, int nbr_lin, int **xyz_m)
+{
+	int			index;
+	char		**split_z;
+	static int	i = 0;
+
+	index = 0;
+	while (split_line[index] != 0)
+	{
+		xyz_m[i] = malloc(5 * sizeof(int));
+		if (xyz_m[i] == NULL)
+			return ;
+		xyz_m[i][0] = i;
+		xyz_m[i][1] = index;
+		xyz_m[i][2] = nbr_lin;
+		split_z = ft_split(split_line[index], ',');
+		color_split(split_z, xyz_m, i);
+		if (xyz_m[i][3] > 0)
+			xyz_m[i][5] = 1;
+		else
+			xyz_m[i][5] = 0;
+		i++;
+		index++;
+		free_function(split_z);
+		split_z = 0;
+	}
+}
+
+void	error_function(char **split_array)
+{
+	free_function(split_array);
+	write(1, "error map\n ", 12);
+	exit(0);
+}
+
+int	**check_list(t_list *list, int *length_line, int line_nbr)
+{
+	char	**split_array;
+	int		nbr_lin;
+	int		**x_y_z_c_array;
+	t_list	*node;
+	int		j;
+
 	node = list;
-	array = ft_split(node -> content, 32);
-	*length_line = ft_strlen_d(array);
-	line_nbr = ft_lstsize(list) - 1;
+	*length_line = ft_strlen_space(list -> content) + 1;
 	x_y_z_c_array = malloc(*length_line * line_nbr * sizeof(int **));
 	nbr_lin = 0;
-	while(list -> next)
+	j = 0;
+	while (list -> next)
 	{
 		split_array = ft_split(list -> content, 32);
-		len = ft_strlen_d(split_array);
-		if (len != *length_line)
-		{
-			write(1,"error map\n ",12);
-			//free
-			exit(0);
-		}
+		j = ft_strlen_space(list -> content) + 1;
+		if (j != ((*length_line)))
+			error_function(split_array);
 		x_y_z_c_function(split_array, nbr_lin, x_y_z_c_array);
-		nbr_lin++;
-		node = list;
 		list = list -> next;
+		free_function(split_array);
+		split_array = 0;
+		nbr_lin++;
 	}
-	 x_y_z_c_array[*length_line * line_nbr] = 0;
-	return x_y_z_c_array;
+	return (x_y_z_c_array);
 }

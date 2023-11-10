@@ -6,95 +6,64 @@
 /*   By: ael-oual <ael-oual@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:44:37 by ael-oual          #+#    #+#             */
-/*   Updated: 2022/04/15 07:44:05 by ael-oual         ###   ########.fr       */
+/*   Updated: 2022/04/26 13:18:19 by ael-oual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include"libft.h"
+#include"libft.h"
 #include "fdf.h"
 
-void print_matrix(int **xyz_m)
+int	ft_strchr_int(const char *str, int c)
 {
-	int i;
+	int			i;
+
 	i = 0;
-	while(xyz_m[i] != 0)
+	while (str[i] != '\0')
 	{
-		printf(" index  %d x %d y %d  z  %d color %d  \n",xyz_m[i][0],xyz_m[i][1],xyz_m[i][2],xyz_m[i][3] ,xyz_m[i][4]);
+		if (str[i] == (unsigned char)c)
+			return (i);
 		i++;
+	}	
+	return (0);
+}
+
+void	copy_d(t_data *img)
+{
+	int	l_nbr;
+
+	l_nbr = 0;
+	img -> xyz_old = malloc(img -> n_points * sizeof(int **));
+	if (img -> xyz_old == NULL)
+		allocation_problem();
+	while (l_nbr < img -> n_points)
+	{
+		img -> xyz_old[l_nbr] = malloc(6 * sizeof(int));
+		if (img -> xyz_old[l_nbr] == NULL)
+			allocation_problem();
+		img -> xyz_old[l_nbr][0] = img -> xyz_m[l_nbr][0];
+		img -> xyz_old[l_nbr][1] = img -> xyz_m[l_nbr][1];
+		img -> xyz_old[l_nbr][2] = img -> xyz_m[l_nbr][2];
+		img -> xyz_old[l_nbr][3] = img -> xyz_m[l_nbr][3];
+		img -> xyz_old[l_nbr][4] = img -> xyz_m[l_nbr][4];
+		img -> xyz_old[l_nbr][5] = img -> xyz_m[l_nbr][5];
+		l_nbr++;
 	}
 }
 
-int ft_strlen_d(char **arr_split)
+int	ft_strlen_space(char *str)
 {
-	int index;
+	int	i;
+	int	index;
 
+	i = 0;
 	index = 0;
-	while(arr_split[index] != 0)
-		index++;
-	return index;
-}
-
-void	my_mlx_pixel(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
-
-// void plotLine(int x0, int y0, int x1, int y1)
-int *bre_algori(t_point ab, int color ,t_data *img)
-  { 
-	static int index;
-	int dx;
-	int sx ;
-	int dy;
-	int sy;
-	int error;
-	
-	dx = abs(ab.x1 - ab.x0);
-    sx = (ab.x0 < ab.x1) ? 1 : -1;
-    dy = -abs(ab.y1 - ab.y0);
-   	sy = (ab.y0 < ab.y1) ? 1 : -1;
-    error = dx + dy;
-    while(1)
-    {   
-		my_mlx_pixel(img, ab.x0, ab.y0, color);
-		if( ab.x0 == ab.x1 && y0 == y1)
-			break;
-		int e2 = 2 * error;
-		if (e2 >= dy)
-			{ 
-		    	if (ab.x0 == ab.x1)
-					break;
-				error = error + dy;
-				ab.x0 = ab.x0 + sx;
-			}
-		if (e2 <= dx)
-			{
-				if (y0 == y1)
-					break;
-				error = error + dx;
-				ab.y0 = ab.y0 + sy;
-			}
-		}
-		return 0;
-	}
-
-void del(void *ptr)
-{
-	 free(ptr);
-}
-
-void print_f(char **xyz_m)
-{
-	int i = 0;
-	printf(" split of content \n");
-	while(xyz_m[i])
+	while (str[i] != '\0' && str[i] != '\n')
 	{
-		printf(" %s ",xyz_m[i]);
+		if (str[i] != 32 && str[i + 1] == 32 && str[i + 1] != '\0')
+			index++;
 		i++;
 	}
+	return (index);
 }
 
 void	free_function(char **str)
@@ -102,11 +71,11 @@ void	free_function(char **str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str[i] != 0)
 	{
 		free(str[i]);
 		i++;
 	}
 	free(str);
-	str = NULL;
+	str = 0;
 }
