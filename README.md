@@ -26,3 +26,11 @@ Is good to know DDA:
 [Geographic coordinate conversion](https://en.wikipedia.org/wiki/Geographic_coordinate_conversion#From_geodetic_to_ECEF_coordinates)
 
 Some magic with mathematic for rotation in the FDF bonus
+
+![](https://raw.githubusercontent.com/abdessamadalami/fdf_1337_42/main/screen/rotaion.png)
+
+==============
+![](https://raw.githubusercontent.com/abdessamadalami/fdf_1337_42/main/screen/1337.png)
+![](https://raw.githubusercontent.com/abdessamadalami/fdf_1337_42/main/screen/42.png)
+
+
